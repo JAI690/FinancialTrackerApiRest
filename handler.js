@@ -9,6 +9,10 @@ const dynamoDbClient = new AWS.DynamoDB.DocumentClient();
 
 app.use(express.json());
 
+app.get("/", (req,res) => {
+  res.json({message:'hello'})
+});
+
 app.get("/users/:userId", async function (req, res) {
   const params = {
     TableName: USERS_TABLE,
