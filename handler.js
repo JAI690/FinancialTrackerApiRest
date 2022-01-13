@@ -2,6 +2,8 @@ const AWS = require("aws-sdk");
 const express = require("express");
 const serverless = require("serverless-http");
 
+require('dotenv').config()
+
 const app = express();
 
 const USERS_TABLE = process.env.USERS_TABLE;
@@ -10,14 +12,14 @@ const dynamoDbClient = new AWS.DynamoDB.DocumentClient();
 app.use(express.json());
 
 app.get("/", (req,res) => {
-  res.json({message:'hello'})
+  res.json({message: 'inicio'})
 });
 
 app.get("/users/:userId", async function (req, res) {
   const params = {
     TableName: USERS_TABLE,
     Key: {
-      userId: req.params.userId,
+      IdUser: req.params.userId,
     },
   };
 
@@ -48,7 +50,7 @@ app.post("/users", async function (req, res) {
   const params = {
     TableName: USERS_TABLE,
     Item: {
-      userId: userId,
+      IdUser: userId,
       name: name,
     },
   };
